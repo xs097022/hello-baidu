@@ -127,13 +127,25 @@
     _canvas.innerHTML = `<input type="file" style="left: 0; top: 0; cursor: pointer; opacity: 0; position: absolute; width: 100%; height: 100%;">`;
     document.body.appendChild(_canvas);
 
+    const downloadFile = (fileName, content) => {
+        var aLink = document.createElement('a');
+        document.body.appendChild(aLink);
+        var blob = new Blob([content]);
+        aLink.download = fileName;
+        aLink.href = URL.createObjectURL(blob);
+        aLink.click();
+        setTimeout(function() {
+            document.body.removeChild(aLink);
+        })
+    };
+
     const startState = async words => {
         state.words = words;
         state.output = [];
         state.isRuning = true;
         canvas.style.transform = 'scale(1)';
         _canvas.style.transform = 'scale(0)';
-        await queryWords(state.output, state.words);
+        downloadFile('123', JSON.stringify(await queryWords(state.output, state.words)));
     };
 
     const endState = () => {
