@@ -109,7 +109,7 @@
     canvas.style.background = 'rgba(13, 67, 24, 0.5)';
     canvas.style.transition = 'transform 1s';
     canvas.style.transform = 'scale(0)';
-    canvas.innerHTML = `<h5 style="display: inline-block; font-size: 30px; color: #fff; background: #000; padding: 10px; margin: 50% auto; font-style: italic;"></h5>`;
+    canvas.innerHTML = `<h5 style="position: absolute; font-size: 30px; color: #fff; background: #000; padding: 10px; top: 50%; left: 50%; font-style: italic;"></h5>`;
     document.body.appendChild(canvas);
 
     const _canvas = document.createElement('div');
