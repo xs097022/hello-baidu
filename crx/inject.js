@@ -57,6 +57,14 @@
         params: { wordlist: [word], typeid: '' }
     });
 
+    MapMap[6] = '品牌词';
+    Map[6] = word => document.querySelector('.index-trend-view').__vue__.$axios.post("/insight/brand/queryBrandId", {
+        keyword: word
+    }).then(async res => {
+        const id = safeGets(res, 'data.0.id');
+        return await id && document.querySelector('.index-trend-view').__vue__.$axios.post("/insight/brand/queryBrandIndex", {entityId: id, regionId: 0, stat: true, recentDay: 30})
+    });
+
     const delayCall = (fn, tFn) => (...args) => new Promise(async resolve => {
         setTimeout(async () => resolve(await fn.apply(null, args)), tFn());
     });
@@ -72,7 +80,8 @@
             Map[2](word),
             Map[3](word),
             Map[4](word),
-            Map[5](word)
+            Map[5](word),
+            Map[6](word)
         ]);
         //const output = [];
         //output[0] = await Map[0](word);
